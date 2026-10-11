@@ -1,4 +1,8 @@
+"use client"
+import Totalbalancebox from "@/components/Totalbalancebox";
 import Header from "../../components/Header";
+import { useState } from "react";
+import { BankAccount } from "@/types/types";
 
 const transactions = [
   { id: 1, name: "Spotify", amount: -15, status: "Processing", date: "Wed 1:00pm", category: "Subscriptions", brand: "green" },
@@ -14,95 +18,44 @@ const budgets = [
   { name: "Savings", value: 92, left: 50, color: "bg-[#0fbf7d]", tone: "bg-[#eafaf2]", label: "text-[#0fbf7d]" },
 ];
 
+
+
 export default function Page() {
+  const [totalBalance, setTotalBalance] = useState(234556);
+  const [totalBanks, setTotalBanks] = useState(2);
+  const [accounts, setAccounts] = useState<BankAccount[]>([ {
+    id: "1",
+    bankName: "Chase Bank",
+    accountName: "Savings Account", 
+    lastFour: "1234",
+    balance: 2588.12,
+    color: "blue",
+    initials: "CB",
+  },
+  {
+    id: "2",
+    bankName: "Bank of America",
+    accountName: "Checking Account",
+    lastFour: "5678",
+    balance: 1500.00,
+    color: "green",
+  initials: "BA",
+
+  }
+
+]);
   return (
-    <div className="min-h-screen bg-[#eef3f8] text-slate-800 lg:p-7">
-      <div className="mx-auto flex max-w-[1400px] overflow-hidden rounded-[28px] border border-slate-200/70 bg-[#f4f7f9] shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
-        <aside className="flex w-[290px] flex-col justify-between border-r border-slate-200 bg-[#f5f7fa] px-5 py-6">
-          <div>
-            <div className="mb-8 flex items-center gap-3 px-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-[10px] bg-gradient-to-br from-[#1e3a8a] via-[#3b82f6] to-[#7dd3fc] shadow-sm">
-                <div className="h-3 w-3 rounded-[4px] border border-white/80" />
-              </div>
-              <span className="text-[2rem] font-semibold tracking-[-0.06em] text-slate-800">Horizon</span>
-            </div>
-
-            <div className="mb-6 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm">
-              <svg viewBox="0 0 24 24" className="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="11" cy="11" r="6" />
-                <path d="m16 16 4 4" />
-              </svg>
-              <span className="text-slate-500">Search</span>
-            </div>
-
-            <nav className="space-y-2 text-base font-medium">
-              {[
-                { label: "Home", active: true },
-                { label: "My Banks" },
-                { label: "Transaction History" },
-                { label: "Payment Transfer" },
-                { label: "Connect Bank" },
-              ].map((item) => (
-                <button
-                  key={item.label}
-                  className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition ${
-                    item.active
-                      ? "bg-[#2f74ff] text-white shadow-[0_10px_18px_rgba(47,116,255,0.25)]"
-                      : "text-slate-700 hover:bg-slate-100"
-                  }`}
-                >
-                  <span className="flex h-5 w-5 items-center justify-center">
-                    {item.label === "Home" && "⌂"}
-                    {item.label === "My Banks" && "◌"}
-                    {item.label === "Transaction History" && "▣"}
-                    {item.label === "Payment Transfer" && "↗"}
-                    {item.label === "Connect Bank" && "▢"}
-                  </span>
-                  <span>{item.label}</span>
-                </button>
-              ))}
-            </nav>
-          </div>
-
-          <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white/90 p-3 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#d9edf9] via-[#e1d4ff] to-[#f5d6de] font-bold text-slate-700">
-                JS
-              </div>
-              <div>
-                <div className="text-[0.9rem] font-semibold text-slate-700">Adrian Hajdin</div>
-                <div className="text-xs text-slate-500">adrian@jsmastery.pro</div>
-              </div>
-            </div>
-            <button className="flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-lg text-slate-500">→</button>
-          </div>
-        </aside>
+    <div className="min-h-screen min-w-0 flex-1 bg-[#eef3f8]  text-slate-800">
+      <div className="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-[1400px] overflow-hidden  border border-slate-200/70 bg-[#f4f7f9]  lg:min-h-[calc(100vh-3.5rem)]">
+        
 
         <main className="flex-1 bg-[#f5f7fb] px-7 py-6">
           <div className="mb-8 flex items-start justify-between gap-5">
             <Header title="Welcome, Adrian" subtitle="Access &amp; manage your account and transactions efficiently." />
           </div>
-
-          <div className="mb-8 flex items-center justify-between rounded-[22px] border border-slate-200 bg-white px-6 py-5 shadow-sm">
-            <div className="flex items-center gap-5">
-              <div className="relative h-20 w-20">
-                <div className="absolute inset-0 rounded-full bg-[conic-gradient(#2f74ff_0_60%,#dfeaf7_60%_100%)]" />
-                <div className="absolute inset-[10px] rounded-full bg-white" />
-                <div className="absolute inset-0 flex items-center justify-center text-xl font-semibold text-slate-700">2</div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 text-xl font-semibold text-slate-800">
-                  2 Bank Accounts
-                </div>
-                <div className="mt-2 text-slate-500">Total Current Balance</div>
-                <div className="mt-2 text-4xl font-semibold tracking-[-0.06em] text-slate-800">$2,698.12</div>
-              </div>
-            </div>
-            <button className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-base font-medium text-slate-700 shadow-sm">
-              <span className="text-xl leading-none">＋</span>
-              Add bank
-            </button>
-          </div>
+          {/* Balance overview */}
+         <Totalbalancebox totalbalance={totalBalance} totalbank={totalBanks} account={accounts} />
+          {/* Recent transactions */}
 
           <section className="mb-8">
             <div className="mb-4 flex items-center justify-between">

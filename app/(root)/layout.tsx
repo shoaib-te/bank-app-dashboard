@@ -1,3 +1,4 @@
+import Sidebar from "@/components/sidebar";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  return (
+    <div className="flex min-h-screen bg-[#eef3f8]">
+      <Sidebar />
+      {children}
+    </div>
+  );
 }
