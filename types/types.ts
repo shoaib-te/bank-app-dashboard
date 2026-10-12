@@ -97,3 +97,15 @@ export interface TotalBalanceBoxProps {
     totalbalance: number;
     totalbank: number;
 }
+
+
+
+export interface AccountData {
+  bank1: number;
+  bank2: number;
+  bank3: number;
+}
+
+export interface ChartProps {
+  account?: BankAccount[];
+}

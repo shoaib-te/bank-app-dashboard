@@ -1,13 +1,50 @@
-function Chart({}) {
+"use client"
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import type { ChartProps } from "@/types/types";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+function Chart({ account = [] }: ChartProps) {
+  const balances = account.length ? account.map((item) => item.balance) : [3400, 550, 2100];
+  const labels = account.length ? account.map((item) => item.bankName) : ["Bank 1", "Bank 2", "Bank 3"];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Bank",
+        data: balances,
+        backgroundColor: [
+          "rgb(99, 135, 255)",
+          "rgb(54, 162, 235)",
+          "rgb(89, 86, 255)",
+          "rgb(236, 72, 153)",
+        ],
+      },
+    ],
+  };
+
   return (
-    <div className="relative h-20 w-20">
-      <div className="absolute inset-0 rounded-full bg-[conic-gradient(#2f74ff_0_60%,#dfeaf7_60%_100%)]" />
-      <div className="absolute inset-2.5 rounded-full bg-white" />
-      <div className="absolute inset-0 flex items-center justify-center text-xl font-semibold text-slate-700">
-        3
-      </div>
+    <div className="h-28 w-28">
+      <Doughnut
+        data={data}
+        options={{
+          cutout: "60%",
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              enabled: true,
+            },
+          },
+        }}
+      />
     </div>
   );
 }
 
-export default Chart
+export default Chart;

@@ -7,10 +7,10 @@ function Totalbalancebox({ account = [], totalbalance, totalbank }: TotalBalance
 
   return (
     <div className="mb-8 flex items-center justify-between rounded-[22px] border border-slate-200 bg-white px-6 py-5 shadow-sm">
-      <div className="flex items-center gap-5">
+      <div className="flex items-center h-30 gap-5">
         
         {/* chart  */}
-        <Chart/>
+        <Chart account={account} />
         <div>
           <div className="flex items-center gap-2 text-xl font-semibold text-slate-800">
             {totalbank} Bank Accounts
